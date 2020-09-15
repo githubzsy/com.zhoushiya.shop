@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoushiya.shop.api.dao.ShopUserMapper">
+    <resultMap id="BaseResultMap" type="com.zhoushiya.shop.api.entity.ShopUser">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="mobile" jdbcType="BIGINT" property="mobile"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, account, nick_name, mobile, password
+  </sql>
+    <!-- 自定义 -->
+    <select id="selectByAccountAndPassword" parameterType="com.zhoushiya.shop.api.vo.LoginParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_user
+        where account = #{account,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_user
+    </select>
+
+    <!-- 自动生成 -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zhoushiya.shop.api.entity.ShopUser">
+    insert into shop_user (id, account, nick_name, 
+      mobile, password)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zhoushiya.shop.api.entity.ShopUser">
+        insert into shop_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zhoushiya.shop.api.entity.ShopUser">
+        update shop_user
+        <set>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zhoushiya.shop.api.entity.ShopUser">
+    update shop_user
+    set account = #{account,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=BIGINT},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
