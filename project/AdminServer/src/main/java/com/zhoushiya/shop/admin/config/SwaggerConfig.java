@@ -1,4 +1,4 @@
-package com.zhoushiya.shop.user.config;
+package com.zhoushiya.shop.admin.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("用户API文档")
-                .description("用户API文档")
+                .title("管理员中心API文档")
+                .description("管理员中心API文档")
                 .version("1.0")
                 .build();
     }

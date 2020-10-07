@@ -13,6 +13,7 @@
         <module>AuthenticationServer</module>
         <module>UserServer</module>
         <module>Commons</module>
+        <module>AdminServer</module>
     </modules>
     <packaging>pom</packaging>
 

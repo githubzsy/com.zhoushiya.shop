@@ -1,0 +1,126 @@
+# 此处为自定义，配置中心和注册中心共同属性，下文引入即可
+nacos:
+  username: nacos
+  password: nacos
+  # 服务分组
+  group: SHOP_GROUP
+  # 配置中心地址
+  server-addr: localhost:8802
+  # 命名空间
+  namespace: shop
+  seata:
+    # seata服务中心的微服务名
+    seata-server-name: seata-server
+
+server:
+  port: 9801
+
+spring:
+  application:
+    name: auth-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        username: ${nacos.username}
+        password: ${nacos.password}
+      config:
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        username: ${nacos.username}
+        password: ${nacos.password}
+        server-addr: ${nacos.server-addr}
+        file-extension: yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+      datasource:
+        dsl:
+          nacos:
+            server-addr: ${nacos.server-addr}
+            dataId: ${spring.application.name}
+            groupId: ${nacos.group}
+            namespace: ${nacos.namespace}
+            data-type: json
+            rule-type: flow
+  # 数据源配置
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/shop_auth?serverTimezone=GMT%2B8
+      username: zhoushiya
+      password: welcome
+  # redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password: welcome
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-idle: 8 # 连接池中的最大空闲连接 默认 8
+        min-idle: 0 # 连接池中的最小空闲连接 默认 0
+  cache:
+    type: redis
+
+caching:
+  ttlmap:
+    user: 10
+    userAll: 20
+
+seata:
+  # 开启自动装配
+  enabled: true
+  application-id: ${spring.application.name}
+  # 读取哪个事务分组
+  tx-service-group: shop_tx_group
+  # 配置中心设置
+  config:
+    type: nacos
+    nacos:
+      username: ${nacos.username}
+      password: ${nacos.password}
+      server-addr: ${nacos.server-addr}
+      # 读取的配置分组
+      group: ${nacos.group}
+      namespace: ${nacos.namespace}
+  # 注册中心设置
+  registry:
+    type: nacos
+    nacos:
+      # SEATA服务中心的微服务名，此处与服务端保持一致
+      application: ${nacos.seata.seata-server-name}
+      server-addr: ${nacos.server-addr}
+      username: ${nacos.username}
+      password: ${nacos.password}
+      namespace: ${nacos.namespace}
+      group: ${nacos.group}
+
+# feign配置
+feign:
+  hystrix:
+    enabled: false
+
+# 日志配置
+logging:
+  level:
+    io:
+      seata: info
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+management:
+  endpoints:
+    # 开启sentinel实时监控
+    sentinel:
+      enabled: true
+    web:
+      exposure:
+        include: "*"

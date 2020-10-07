@@ -1,4 +1,4 @@
-package com.zhoushiya.shop.user.entity;
+package com.zhoushiya.shop.admin.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zhoushiya
- * @date 2020/10/6 14:39
+ * @date 2020/10/7 17:27
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class ShopUser {
     /**
      * 主键
      */

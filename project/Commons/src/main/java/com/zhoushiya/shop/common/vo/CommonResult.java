@@ -1,10 +1,8 @@
-package com.zhoushiya.shop.common.entity;
+package com.zhoushiya.shop.common.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 /**
  * @author zhoushiya

@@ -1,4 +1,4 @@
-package com.zhoushiya.shop.user.config;
+package com.zhoushiya.shop.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("用户API文档")
-                .description("用户API文档")
+                .title("认证API文档")
+                .description("认证API")
                 .version("1.0")
                 .build();
     }

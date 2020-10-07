@@ -1,7 +1,7 @@
 package com.zhoushiya.shop.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.zhoushiya.shop.common.entity.CommonResult;
+import com.zhoushiya.shop.common.vo.CommonResult;
 import com.zhoushiya.shop.user.entity.User;
 import com.zhoushiya.shop.user.service.UserService;
 import org.springframework.beans.factory.annotation.Value;

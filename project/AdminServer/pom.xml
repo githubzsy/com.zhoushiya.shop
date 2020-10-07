@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zhoushiya.shop</groupId>
-    <artifactId>AuthenticationServer</artifactId>
+    <artifactId>AdminServer</artifactId>
 
     <dependencies>
         <dependency>

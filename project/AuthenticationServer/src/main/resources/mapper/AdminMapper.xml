@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhoushiya.shop.auth.dao.AdminDao" >
+    <resultMap id="BaseResultMap" type="com.zhoushiya.shop.auth.entity.Admin" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="account" property="account" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, account, password
+  </sql>
+
+    <!-- 按照账号密码查找 -->
+    <select id="selectByAccountAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `admin`
+        where account = #{account,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `admin`
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from `admin`
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey">
+    delete from `admin`
+    where id = #{id}
+  </delete>
+    <insert id="create" parameterType="com.zhoushiya.shop.auth.entity.Admin" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+    insert into `admin` (id, account, password)
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.zhoushiya.shop.auth.entity.Admin" >
+    update `admin`
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
