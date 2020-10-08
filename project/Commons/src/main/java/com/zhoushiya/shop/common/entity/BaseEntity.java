@@ -4,14 +4,6 @@ package com.zhoushiya.shop.common.entity;
  * @author zhoushiya
  * @date 2020/8/26 20:06
  */
-public abstract class BaseEntity {
-    protected long id;
+public interface BaseEntity {
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 }

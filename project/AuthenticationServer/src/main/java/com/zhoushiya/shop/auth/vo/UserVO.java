@@ -1,6 +1,7 @@
 package com.zhoushiya.shop.auth.vo;
 
-import com.zhoushiya.shop.common.vo.BaseVO;
+import com.zhoushiya.shop.auth.entity.User;
+import com.zhoushiya.shop.common.vo.BaseVOWithIdImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO extends BaseVO {
+public class UserVO extends BaseVOWithIdImpl {
     private String account;
 }

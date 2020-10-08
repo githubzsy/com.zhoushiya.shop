@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhoushiya.shop.order.dao.OrderDao" >
+
+  <select id="list" resultType="com.zhoushiya.shop.order.entity.Order">
+    select * from `order`;
+  </select>
+
+  <select id="listVO" resultType="com.zhoushiya.shop.order.vo.OrderVO">
+    select a.*,b.* from `order` a
+    left join order_extra b on b.order_id=a.id;
+  </select>
+
+  <select id="selectByPrimaryKey" resultType="com.zhoushiya.shop.order.entity.Order" >
+    select * `order`
+    where a.id = #{id}
+  </select>
+
+  <select id="selectVOByPrimaryKey" resultType="com.zhoushiya.shop.order.vo.OrderVO" >
+    select a.*,b.* from `order` a
+    left join order_extra b on b.order_id=a.id
+    where a.id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey">
+    delete from product
+    where id = #{id}
+  </delete>
+  <insert id="create" parameterType="com.zhoushiya.shop.order.entity.Order" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+    insert into `order` (product_id,count,total_price,user_id,order_time)
+    values (#{productId}, #{count},#{totalPrice},#{userId},#{orderTime});
+  </insert>
+</mapper>

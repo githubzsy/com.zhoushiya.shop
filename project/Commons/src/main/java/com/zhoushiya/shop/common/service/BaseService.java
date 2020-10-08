@@ -1,5 +1,6 @@
 package com.zhoushiya.shop.common.service;
 
+import com.zhoushiya.shop.common.entity.BaseEntity;
 import com.zhoushiya.shop.common.vo.BaseVO;
 
 import java.util.List;
@@ -28,14 +29,14 @@ public interface BaseService<VO extends BaseVO> {
      * @param id
      * @return
      */
-    VO getById(Integer id);
+    VO getById(long id);
 
     /**
      * 删除数据
      * @param id
      * @return
      */
-    void deleteById(Integer id);
+    void deleteById(long id);
 
     /**
      * 查询所有数据

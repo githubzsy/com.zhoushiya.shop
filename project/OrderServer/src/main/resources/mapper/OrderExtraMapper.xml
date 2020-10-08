@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhoushiya.shop.order.dao.OrderExtraDao">
+    <update id="changeStatus">
+        update order_extra
+        set status_id=#{status_id}
+        where order_id=#{order_id};
+    </update>
+
+    <insert id="create" keyProperty="order_id" keyColumn="order_id">
+        insert into order_extra (order_id,address,buyer,mobile,status_id)
+        values (#{orderId},#{address},#{buyer},#{mobile},#{statusId});
+    </insert>
+
+</mapper>

@@ -14,6 +14,8 @@
         <module>UserServer</module>
         <module>Commons</module>
         <module>AdminServer</module>
+        <module>ProductServer</module>
+        <module>OrderServer</module>
     </modules>
     <packaging>pom</packaging>
 

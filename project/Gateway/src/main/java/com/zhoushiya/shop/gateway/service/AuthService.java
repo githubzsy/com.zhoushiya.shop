@@ -1,6 +1,8 @@
 package com.zhoushiya.shop.gateway.service;
 
 import com.zhoushiya.shop.common.vo.CommonResult;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,5 +21,6 @@ public interface AuthService {
      * @return
      */
     @GetMapping("/auth/admin/verify/{id}/{token}")
+    @Cacheable(value="adminVerify",key = "#p0+#p1")
     ResponseEntity<CommonResult> adminVerify(@PathVariable("id") long id, @PathVariable("token") String token);
 }

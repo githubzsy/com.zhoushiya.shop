@@ -3,6 +3,7 @@ package com.zhoushiya.shop.gateway.filter;
 import com.zhoushiya.shop.common.vo.CommonResult;
 import com.zhoushiya.shop.gateway.service.AuthService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;

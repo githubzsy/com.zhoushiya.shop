@@ -13,7 +13,7 @@ public interface BaseDao<Entity extends BaseEntity> {
 
     int create(Entity record);
 
-    Entity selectByPrimaryKey(Integer id);
+    Entity selectByPrimaryKey(long id);
 
     int updateByPrimaryKey(Entity record);
 

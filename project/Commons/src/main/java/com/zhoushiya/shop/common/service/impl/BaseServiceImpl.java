@@ -15,10 +15,10 @@ import java.util.List;
  * @author zhoushiya
  * @date 2020/10/7 11:45
  */
-public abstract class BaseServiceImpl<Entity extends BaseEntity, VO extends BaseVO> implements BaseService<VO> {
+public abstract class BaseServiceImpl<Entity extends BaseEntity,VO extends BaseVO> implements BaseService<VO> {
 
     @Autowired
-    Mapper mapper;
+    protected Mapper mapper;
 
     /**
      * Entity的实际类型
@@ -30,6 +30,7 @@ public abstract class BaseServiceImpl<Entity extends BaseEntity, VO extends Base
      */
     final Class<VO> voClass = (Class<VO>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
 
+
     /**
      * 获取当前使用的实际Dao
      * @return 实际Dao
@@ -40,7 +41,7 @@ public abstract class BaseServiceImpl<Entity extends BaseEntity, VO extends Base
     public void create(VO vo) {
         Entity entity = mapper.map(vo, entityClass);
         getCurrentDao().create(entity);
-        vo.setId(entity.getId());
+        vo.afterCreateSuccess(entity);
     }
 
     @Override
@@ -50,14 +51,14 @@ public abstract class BaseServiceImpl<Entity extends BaseEntity, VO extends Base
     }
 
     @Override
-    public VO getById(Integer id) {
+    public VO getById(long id) {
         Entity entity = getCurrentDao().selectByPrimaryKey(id);
         VO vo = mapper.map(entity, voClass);
         return vo;
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(long id) {
         getCurrentDao().deleteByPrimaryKey(id);
     }
 

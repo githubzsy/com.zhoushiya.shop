@@ -1,21 +1,11 @@
 package com.zhoushiya.shop.common.vo;
 
+import com.zhoushiya.shop.common.entity.BaseEntity;
+
 /**
  * @author zhoushiya
  * @date 2020/8/26 20:04
  */
-public abstract class BaseVO {
-    public BaseVO() {
-    }
-
-    protected long id;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+public interface BaseVO<Entity extends BaseEntity>{
+    void afterCreateSuccess(Entity entity);
 }

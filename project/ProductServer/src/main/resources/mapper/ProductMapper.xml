@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhoushiya.shop.product.dao.ProductDao" >
+  <resultMap id="BaseResultMap" type="com.zhoushiya.shop.product.entity.Product" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" ></result>
+    <result column="price" property="price" jdbcType="DECIMAL" ></result>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,name,type_id,description,price
+  </sql>
+
+  <select id="list" resultType="com.zhoushiya.shop.product.entity.Product">
+    select * from product;
+  </select>
+
+
+  <select id="listVO" resultType="com.zhoushiya.shop.product.vo.ProductVO">
+    select a.*,b.stock from product a
+    left join product_stock b on b.product_id=a.id
+  </select>
+
+  <select id="selectByPrimaryKey" resultType="com.zhoushiya.shop.product.entity.Product">
+    select * from product
+    where id=#{id};
+  </select>
+
+  <select id="selectVOByPrimaryKey" resultType="com.zhoushiya.shop.product.vo.ProductVO" >
+    select a.*,b.stock from product a
+    left join product_stock b on b.product_id=a.id
+    where a.id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey">
+    delete from product
+    where id = #{id}
+  </delete>
+  <insert id="create" parameterType="com.zhoushiya.shop.product.entity.Product" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+    insert into product (name, type_id,description,price)
+    values (#{name}, #{typeId},#{description},#{price})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.zhoushiya.shop.product.entity.Product" >
+    update product
+    set name = #{name},
+      type_id = #{type_id},
+      description=#{description},
+      price=#{price}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
