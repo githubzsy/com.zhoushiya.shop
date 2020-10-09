@@ -21,6 +21,8 @@ public interface AuthService {
      * @return
      */
     @GetMapping("/auth/admin/verify/{id}/{token}")
-    @Cacheable(value="adminVerify",key = "#p0+#p1")
     ResponseEntity<CommonResult> adminVerify(@PathVariable("id") long id, @PathVariable("token") String token);
+
+    @GetMapping("/auth/user/verify/{id}/{token}")
+    ResponseEntity<CommonResult> userVerify(@PathVariable("id") long id, @PathVariable("token") String token);
 }

@@ -1,3 +1,15 @@
+# 此处为自定义，配置中心和注册中心共同属性，下文引入即可
+nacos:
+  username: nacos
+  password: nacos
+  # 服务分组
+  group: SHOP_GROUP
+  # 配置中心地址
+  server-addr: localhost:8802
+  # 命名空间
+  namespace: shop
+
+
 server:
   port: 8831
 spring:
@@ -6,12 +18,18 @@ spring:
   cloud:
     nacos:
       discovery:
-        cluster-name: GATEWAY
-        server-addr: localhost:8802
-        username: nacos
-        password: nacos
-        group: SHOP_GROUP
-        namespace: shop
+        server-addr: ${nacos.server-addr}
+        username: ${nacos.username}
+        password: ${nacos.password}
+        group: ${nacos.group}
+        namespace: ${nacos.namespace}
+      config:
+        namespace: ${nacos.namespace}
+        group: ${nacos.group}
+        username: ${nacos.username}
+        password: ${nacos.password}
+        server-addr: ${nacos.server-addr}
+        file-extension: yaml
     gateway:
       # 开启服务发现，下面使用微服务名称进行调用
       discovery:
@@ -19,7 +37,7 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-          # 路由器 ID，没有固定规则但要求唯一，建议配合服务名
+        # 路由器 ID，没有固定规则但要求唯一，建议配合服务名
         - id: user_routh
           # 匹配后提供服务的路由地址
           # uri: http://localhost:8001
@@ -32,11 +50,38 @@ spring:
           uri: lb://auth-server
           predicates:
             - Path=/auth/**
+        # /admin/**请求匹配到admin-server
         - id: admin_routh
           uri: lb://admin-server
           predicates:
+            - Path=/admin/**
             - Header=admin_token
             - Header=admin_id
+        # /order/getAll请求匹配到order-server
+        - id: order_getAll
+          uri: lb://order-server
+          predicates:
+            - Path=/order/getAll
+            - Method=GET
+            - Header=admin_token
+            - Header=admin_id
+        # /product/getAll请求匹配到product-server
+        - id: product_routh
+          uri: lb://product-server
+          predicates:
+            - Path=/product/getAll
+            - Header=admin_token
+            - Header=admin_id
+        # /order POST请求匹配到order-server
+        - id: order_create
+          uri: lb://order-server
+          predicates:
+            - Path=/order
+            - Method=POST
+            - Header=user_token
+            - Header=user_id
+
+
 
 ribbon:
   # 建立连接超时时间
