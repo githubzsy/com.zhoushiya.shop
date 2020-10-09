@@ -53,8 +53,8 @@ spring:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/shop_product?serverTimezone=GMT%2B8
-      username: zhoushiya
-      password: welcome
+      username: root
+      password: root
   # redis配置
   redis:
     host: localhost

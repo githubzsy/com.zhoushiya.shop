@@ -87,4 +87,4 @@ ribbon:
   # 建立连接超时时间
   ConnectTimeout: 5000
   # 建立连接后从服务器读取到可用资源的所用时间（默认1000，即1秒）
-  ReadTimeout: 50000
+  ReadTimeout: 2000

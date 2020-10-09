@@ -9,7 +9,7 @@
    - Nacos集群服务，端口号8802
    - Sentinel服务降级，默认端口8080，8719
    - Seata分布式事务，默认端口，注册到Nacos中
-   - Mysql数据库，默认端口3306，账号root，密码root
+   - Mysql数据库8.X版本，默认端口3306，账号root，密码root
    - Redis，默认端口，没有密码
 5. 主模块如下
    - Gateway网关服务，负责路由、过滤、鉴权。暴露给nginx反向代理，端口号8831。
