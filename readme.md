@@ -20,4 +20,4 @@
    - AdminServer管理员中心，端口号9841。
 6. 利用以上模块简单描述以下用户下单流程（只绘制了成功的流程）：
 
-![下单](流程图\下单.png)
+![下单](https://github.com/githubzsy/com.zhoushiya.shop/blob/master/%E6%B5%81%E7%A8%8B%E5%9B%BE/%E4%B8%8B%E5%8D%95.png)
